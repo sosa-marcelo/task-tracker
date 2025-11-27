@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "description": "Buy milk",
+    "status": "IN PROGRESS",
+    "created_at": "2025-01-01T10:00:00Z",
+    "updated_at": "2025-01-01T12:00:00Z"
+  },
+  {
+    "id": 2,
+    "description": "Finish backend API",
+    "status": "TO DO",
+    "created_at": "2025-01-02T09:15:00Z",
+    "updated_at": "2025-01-02T09:15:00Z"
+  },
+  {
+    "id": 3,
+    "description": "Clean the house",
+    "status": "DONE",
+    "created_at": "2025-01-03T08:00:00Z",
+    "updated_at": "2025-01-03T11:30:00Z"
+  },
+  {
+    "id": 4,
+    "description": "Read 20 pages",
+    "status": "IN PROGRESS",
+    "created_at": "2025-01-04T14:20:00Z",
+    "updated_at": "2025-01-04T15:05:00Z"
+  },
+  {
+    "id": 5,
+    "description": "Prepare dinner",
+    "status": "TO DO",
+    "created_at": "2025-01-05T17:45:00Z",
+    "updated_at": "2025-01-05T17:45:00Z"
+  }
+]
