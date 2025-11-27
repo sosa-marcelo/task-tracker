@@ -1,6 +1,9 @@
 {
   "name": "task-tracker",
   "version": "1.0.0",
+  "bin": {
+    "task-tracker": "./index.js"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,5 +11,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^14.0.2"
+  }
 }
