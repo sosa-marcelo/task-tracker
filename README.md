@@ -22,13 +22,6 @@ To list all tasks, you can use the following command, it will return all tasks
 task-cli list
 ```
 If you want to filter the tasks by status, you can use one of the following filters: done, todo, in-progress.
-
-```
-task-cli list {filter}
-```
-
-#### Example:
-- To list all pending tasks (todo):
 ```bash
 task-cli list todo
 task-cli list in-progress
@@ -63,5 +56,4 @@ To delete a task, use the following command with the task ID:
 task-cli delete <id>
 ```
 
-# Project URL: https://roadmap.sh/projects/task-tracker
-**
+### Project URL: https://roadmap.sh/projects/task-tracker
