@@ -13,56 +13,76 @@ program
   .command('add <task>')
   .description('add a new task')
   .action((task) => {
-    addTask(task);
-    console.log(`Task added: ${task}`);
+    try {
+      addTask(task);
+      console.log(`Task added: ${task}`);
+    } catch (error) {
+      console.error('Error adding task:', error.message);
+    }
   });
 
 program
   .command('update <id> <property> <data>')
   .description("update an existing task")
   .action((id, property, data) => {
-    if (property !== 'description') {
-      console.log(`You can only update the description property.`)
-      return
+    try {
+      updateTask(+id, property, data)
+      console.log(`Task ${id} updated`)
+    } catch (error) {
+      console.error('Error updating task:', error.message);
     }
 
-    updateTask(+id, property, data)
-    console.log(`Task ${id} updated`)
   })
 
 program
   .command('delete <id>')
   .description("delete a task")
   .action((id) => {
-    deleteTask(+id)
-    console.log(`Task ${id} deleted`)
+    try {
+      deleteTask(+id)
+      console.log(`Task ${id} deleted`)
+    } catch (error) {
+      console.error('Error deleting task:', error.message);
+    }
   })
 
 // Cambiar el estado de una tarea
 const mark = program.command('mark').description("mark a task's status")
 
 mark
-  .command('todo <id>')
-  .description('change a task status to in-progress')
+  .command(`${taskStatus.TODO} <id>`)
+  .description(`change a task status to ${taskStatus.TODO}`)
   .action((id) => {
-    changeTaskStatus(+id, 'todo')
-    console.log(`Task ${id} is now 'todo'`)
+    try {
+      changeTaskStatus(+id, taskStatus.TODO)
+      console.log(`Task ${id} is now '${taskStatus.TODO}'`)
+    } catch (error) {
+      console.error('Error changing task status:', error.message);
+    }
   })
 
 mark
-  .command('in-progress <id>')
-  .description('change a task status to in-progress')
+  .command(`${taskStatus.IN_PROGRESS} <id>`)
+  .description(`change a task status to ${taskStatus.IN_PROGRESS}`)
   .action((id) => {
-    changeTaskStatus(+id, 'in-progress')
-    console.log(`Task ${id} is now 'in-progress'`)
+    try {
+      changeTaskStatus(+id, taskStatus.IN_PROGRESS)
+      console.log(`Task ${id} is now '${taskStatus.IN_PROGRESS}'`)
+    } catch (error) {
+      console.error('Error changing task status:', error.message);
+    }
   })
 
 mark
-  .command('done <id>')
-  .description('change a task status to in-progress')
+  .command(`${taskStatus.DONE} <id>`)
+  .description(`change a task status to ${taskStatus.DONE}`)
   .action((id) => {
-    changeTaskStatus(+id, 'done')
-    console.log(`Task ${id} is now 'done'`)
+    try {
+      changeTaskStatus(+id, taskStatus.DONE)
+      console.log(`Task ${id} is now '${taskStatus.DONE}'`)
+    } catch (error) {
+      console.error('Error changing task status:', error.message);
+    }
   })
 
 // Listar tareas
