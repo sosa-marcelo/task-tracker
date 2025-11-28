@@ -1,20 +1,7 @@
 #!/usr/bin/env node
 import { program } from 'commander';
-import fs from 'fs';
-import path from 'path';
-
-const tasks = JSON.parse(fs.readFileSync(path.resolve('./tasks.json'), 'utf-8'));
-
-
-const addTask = (task) => {};
-const updateTask = (id, data) => {};
-const deleteTask = (id) => {};
-const changeTaskStatus = (id, status) => {};
-const listTasks = (status = null) => {
-  status
-    ? console.log(tasks.filter(task => task.status === status))
-    : console.log(tasks)
-};
+import { taskStatus } from './utils/taskStatus.js';
+import { addTask, updateTask, deleteTask, changeTaskStatus, listTasks } from './utils/actions.js';
 
 program
   .name("task-tracker")
@@ -31,10 +18,15 @@ program
   });
 
 program
-  .command('update <id> <task>')
+  .command('update <id> <property> <data>')
   .description("update an existing task")
-  .action((id, task) => {
-    updateTask(id, task)
+  .action((id, property, data) => {
+    if (property !== 'description') {
+      console.log(`You can only update the description property.`)
+      return
+    }
+
+    updateTask(+id, property, data)
     console.log(`Task ${id} updated`)
   })
 
@@ -42,23 +34,18 @@ program
   .command('delete <id>')
   .description("delete a task")
   .action((id) => {
-    deleteTask(id)
+    deleteTask(+id)
     console.log(`Task ${id} deleted`)
   })
 
 // Cambiar el estado de una tarea
-const mark = program
-  .command('mark')
-  .description("mark a task's status")
-  .action(() => {
-    listTasks()
-  })
+const mark = program.command('mark').description("mark a task's status")
 
 mark
   .command('todo <id>')
   .description('change a task status to in-progress')
   .action((id) => {
-    changeTaskStatus(id, 'todo')
+    changeTaskStatus(+id, 'todo')
     console.log(`Task ${id} is now 'todo'`)
   })
 
@@ -66,7 +53,7 @@ mark
   .command('in-progress <id>')
   .description('change a task status to in-progress')
   .action((id) => {
-    changeTaskStatus(id, 'in-progress')
+    changeTaskStatus(+id, 'in-progress')
     console.log(`Task ${id} is now 'in-progress'`)
   })
 
@@ -74,7 +61,7 @@ mark
   .command('done <id>')
   .description('change a task status to in-progress')
   .action((id) => {
-    changeTaskStatus(id, 'done')
+    changeTaskStatus(+id, 'done')
     console.log(`Task ${id} is now 'done'`)
   })
 
@@ -85,19 +72,19 @@ const list = program
   .action(() => listTasks())
 
 list
-  .command('todo')
-  .description('list tasks with status todo')
-  .action(() => listTasks('todo'))
+  .command(taskStatus.TODO)
+  .description(`list tasks with status ${taskStatus.TODO}`)
+  .action(() => listTasks(taskStatus.TODO))
 
 list
-  .command('in-progress')
-  .description('list tasks with status in-progress')
-  .action(() => listTasks('in-progress'))
+  .command(taskStatus.IN_PROGRESS)
+  .description(`list tasks with status ${taskStatus.IN_PROGRESS}`)
+  .action(() => listTasks(taskStatus.IN_PROGRESS))
 
 list
-  .command('done')
-  .description('list tasks with status done')
-  .action(() => listTasks('done'))
+  .command(taskStatus.DONE)
+  .description(`list tasks with status ${taskStatus.DONE}`)
+  .action(() => listTasks(taskStatus.DONE))
 
 program.parse()
 

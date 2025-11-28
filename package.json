@@ -2,7 +2,7 @@
   "name": "task-tracker",
   "version": "1.0.0",
   "bin": {
-    "task-tracker": "./index.js"
+    "task-cli": "./index.js"
   },
   "description": "",
   "main": "index.js",
