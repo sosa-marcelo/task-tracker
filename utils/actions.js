@@ -25,18 +25,14 @@ export const addTask = (desc) => {
   fs.writeFileSync(jsonPath, JSON.stringify(newTasks))
 };
 
-export const updateTask = (id, property, data) => {
+export const updateTask = (id, desc) => {
   if (!tasks.find(t => t.id === id)) {
     throw new Error(`Task with id ${id} not found`)
   }
 
-  if (property !== 'description') {
-      throw new Error(`You can only update the description property.`)
-  }
-
   const taskToUpdate = tasks.find(t => t.id === id)
 
-  taskToUpdate[property] = data
+  taskToUpdate.description = desc
   taskToUpdate.updated_at = new Date()
   fs.writeFileSync(jsonPath, JSON.stringify(tasks))
 };

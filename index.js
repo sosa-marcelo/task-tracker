@@ -22,11 +22,11 @@ program
   });
 
 program
-  .command('update <id> <property> <data>')
+  .command('update <id> <description>')
   .description("update an existing task")
-  .action((id, property, data) => {
+  .action((id, description) => {
     try {
-      updateTask(+id, property, data)
+      updateTask(+id, description)
       console.log(`Task ${id} updated`)
     } catch (error) {
       console.error('Error updating task:', error.message);
